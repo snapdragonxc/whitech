@@ -1,0 +1,125 @@
+* {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
+a {
+  color: #00B7FF;
+}
+img {
+  width: 150px;
+  height: 150px;
+}
+
+.img-container {
+  width: 150px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding-top: 8px;
+  padding-bottom: 5px;
+}
+
+figure {
+  border: 1px solid #ddd;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #fff;
+}
+
+figcaption {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+header {
+  border-bottom: 1px solid #ddd;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.pull-right {
+    float: right;
+}
+.pull-left {
+    float: left;
+}
+
+/* Header */
+.header__title {
+  font-size: 22px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.header__number {
+  color: #888;
+}
+
+.header__perPage {
+
+}
+
+/* Product */
+.product__name {
+  line-height: 1.5;
+  color: #555;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.product__description {
+  line-height: 1.5;
+  color: #888;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.product__price {
+  color: #111;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+/*  Pagination */
+
+.pagination {
+  margin-top: 35px;
+  list-style-type: none;
+}
+.pagination__item {
+  display: block;
+  float: left;
+}
+
+.pagination__item:not(:first-child) &__box {
+  border-left: 0;
+}
+
+.pagination__box {
+  display: inline-block;
+  color: #444;
+  font-size: 14px;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination__box.active {
+  background-color: #fff;
+  color: #111;
+  border-bottom: 3px solid black;
+}
+
+.pagination__box:hover {
+  cursor: pointer;
+  color: #888;
+}
