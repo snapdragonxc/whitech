@@ -9,8 +9,8 @@ const page = 1;
 
 describe('Container', () => {
 
-    describe('it should mapStateToProps', () => {
-      it('should load the stacks', () => {
+    describe('mapStateToProps', () => {
+      it('should map state to props', () => {
 
         const props = {
           loaded: true,
@@ -59,6 +59,9 @@ describe('Container', () => {
       it('should call setProducts', () => {
           expect(props.setProducts).toHaveBeenCalled();
           expect(props.setProducts).toHaveBeenCalledWith(pageData);
+      });
+      it('should not call getProducts', () => {
+          expect(props.getProducts).not.toHaveBeenCalled();
       });
     })
 
