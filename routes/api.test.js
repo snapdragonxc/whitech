@@ -15,7 +15,7 @@ describe('Products api tests', () => {
         server.get('/api')
             .end((err, res) => {
 
-              console.log('dd', res.body)
+    //          console.log('dd', res.body)
               expect(res.body).toEqual(products)
               done();
             });

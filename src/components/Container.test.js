@@ -2,15 +2,65 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import  { Container } from './Container';
-
-import { fakeServer } from 'sinon';
-
-import { productsPerPage } from '../../data/fixtures';
-
+import  { Container, mapStateToProps } from './Container';
+import { productsPerPage, products } from '../../data/fixtures';
+import sinon from 'sinon';
 const page = 1;
 
 describe('Container', () => {
+
+    describe('it should mapStateToProps', () => {
+      it('should load the stacks', () => {
+
+        const props = {
+          loaded: true,
+          productsPerPage: productsPerPage,
+          page: page,
+          pages: products / 8,
+          perPage: 8,
+          numberProducts: products.length
+        }
+        const expected = props;
+        let state = props
+        expect(mapStateToProps(state)).toEqual(expected);
+      });
+    })
+
+    describe('it should fetch data', () => {
+      const sandbox = sinon.sandbox.create();
+      const server = sandbox.useFakeServer();
+      const props = {
+        loaded: false,
+        history: { push: jest.fn()},
+        match: { params: { page: '1' }},
+        getProducts: jest.fn(),
+        setProducts: jest.fn()
+      }
+      const  wrapper = shallow(<Container {...props}/>);
+      const instance = wrapper.instance();
+
+      let pageData = {
+        products: products,
+        page
+      }
+
+      beforeEach((done) => {
+        jest.spyOn(props, 'getProducts');
+        jest.spyOn(props, 'setProducts');
+        instance.componentDidMount(done);
+        setTimeout(
+          () => server.respond(
+          [200,
+          { 'Content-Type': 'application/json' },
+          JSON.stringify(products)
+        ]));
+      })
+
+      it('should call setProducts', () => {
+          expect(props.setProducts).toHaveBeenCalled();
+          expect(props.setProducts).toHaveBeenCalledWith(pageData);
+      });
+    })
 
     describe('does not call get products when prev page is clicked if page = 1', () => {
       const props = {
@@ -116,8 +166,6 @@ describe('Container', () => {
       });
     });
 
-    /* componentDidMount */
-
     describe('ComponentDidMount already loaded with products', () => {
         const props = {
           loaded: true,
@@ -153,7 +201,4 @@ describe('Container', () => {
           expect(props.getProducts).not.toHaveBeenCalled();
         });
     });
-
-
-
 });

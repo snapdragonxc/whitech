@@ -36,6 +36,11 @@ const Stateloaded = {
 }
 
 describe('root reducer', () => {
+
+  it('returns the initial state', () => {
+    expect(rootReducer()).toEqual(initialState);
+  });
+
   it('returns the initial state', () => {
     expect(rootReducer(initialState, {})).toEqual(initialState);
   });

@@ -20,7 +20,7 @@ export class Container extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount(done) {
     let page = Number(this.props.match.params.page);
     if (isNaN(page) ) {
       this.setState({ nan : true})
@@ -34,7 +34,8 @@ export class Container extends Component {
           page
         }
         this.props.setProducts(pageData);
-      })
+      }).then(done);
+
     } else {
       this.props.getProducts(page);
     }
@@ -89,7 +90,7 @@ export class Container extends Component {
   }
 }
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     loaded: state.loaded,
     productsPerPage: state.productsPerPage,

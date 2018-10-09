@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { SET_PRODUCTS, GET_PRODUCTS, ON_PER_PAGE } from '../actions';
 
-function products(state = {
+const initialState = {
   products: [],
   loaded: false,
   page: 1,
@@ -9,8 +9,14 @@ function products(state = {
   pages: 1,
   perPage: 8,
   numberProducts: 0
-}, action) {
-  switch(action.type) {
+};
+
+function products(state = initialState, action ) {
+  let type = '';
+  if( action ) {
+    type = action.type
+  }
+  switch(type) {
     case SET_PRODUCTS:
       {
         let { page, products } = action.pageData;
